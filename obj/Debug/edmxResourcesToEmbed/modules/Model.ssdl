@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bookset">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="auther" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="publisher" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="count" Type="smallint" Nullable="false" />
+    <Property Name="shabak" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Shelf_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loanset">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="loanDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="returnDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Memberset">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="family" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="NC" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" />
+    <Property Name="mobile" Type="nvarchar(max)" />
+    <Property Name="userName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Roll_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rollset">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rollName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Shelves">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shelfName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BookLoan">
+    <End Role="Bookset" Type="Self.Bookset" Multiplicity="1" />
+    <End Role="Loanset" Type="Self.Loanset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bookset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Loanset">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookShelf">
+    <End Role="Shelves" Type="Self.Shelves" Multiplicity="1" />
+    <End Role="Bookset" Type="Self.Bookset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shelves">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bookset">
+        <PropertyRef Name="Shelf_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberLoan">
+    <End Role="Memberset" Type="Self.Memberset" Multiplicity="1" />
+    <End Role="Loanset" Type="Self.Loanset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Memberset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Loanset">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberRoll">
+    <End Role="Rollset" Type="Self.Rollset" Multiplicity="1" />
+    <End Role="Memberset" Type="Self.Memberset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rollset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Memberset">
+        <PropertyRef Name="Roll_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibDBModelStoreContainer">
+    <EntitySet Name="Bookset" EntityType="Self.Bookset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loanset" EntityType="Self.Loanset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Memberset" EntityType="Self.Memberset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rollset" EntityType="Self.Rollset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shelves" EntityType="Self.Shelves" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BookLoan" Association="Self.FK_BookLoan">
+      <End Role="Bookset" EntitySet="Bookset" />
+      <End Role="Loanset" EntitySet="Loanset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookShelf" Association="Self.FK_BookShelf">
+      <End Role="Shelves" EntitySet="Shelves" />
+      <End Role="Bookset" EntitySet="Bookset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberLoan" Association="Self.FK_MemberLoan">
+      <End Role="Memberset" EntitySet="Memberset" />
+      <End Role="Loanset" EntitySet="Loanset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberRoll" Association="Self.FK_MemberRoll">
+      <End Role="Rollset" EntitySet="Rollset" />
+      <End Role="Memberset" EntitySet="Memberset" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

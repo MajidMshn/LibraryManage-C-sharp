@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="libraryDBModelStoreContainer" CdmEntityContainer="libraryDBEntities">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="IsTypeOf(libraryDBModel.Book)">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="Auther" ColumnName="Auther" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Shabak" ColumnName="Shabak" />
+          <ScalarProperty Name="ShelfShelfId" ColumnName="ShelfShelfId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loans">
+      <EntityTypeMapping TypeName="IsTypeOf(libraryDBModel.Loan)">
+        <MappingFragment StoreEntitySet="Loans">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="LoanDate" ColumnName="LoanDate" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+          <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="IsTypeOf(libraryDBModel.Member)">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+          <ScalarProperty Name="NC" ColumnName="NC" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RollRollId" ColumnName="RollRollId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rolls">
+      <EntityTypeMapping TypeName="IsTypeOf(libraryDBModel.Roll)">
+        <MappingFragment StoreEntitySet="Rolls">
+          <ScalarProperty Name="RollId" ColumnName="RollId" />
+          <ScalarProperty Name="RollName" ColumnName="RollName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shelves">
+      <EntityTypeMapping TypeName="IsTypeOf(libraryDBModel.Shelf)">
+        <MappingFragment StoreEntitySet="Shelves">
+          <ScalarProperty Name="ShelfId" ColumnName="ShelfId" />
+          <ScalarProperty Name="ShelfName" ColumnName="ShelfName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
